@@ -1,9 +1,9 @@
 import sys,os
 
-sys.path.append('c:/Users/ramosv/Desktop/GitHub/Flask-Website/')
+#sys.path.append('c:/Users/ramosv/Desktop/GitHub/Flask-Website/')
 
 
-from site import build
+from website import build
 
 app = build()
 
