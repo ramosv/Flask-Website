@@ -1,6 +1,38 @@
 {% extends "base.html"%}
 {% block title %}Sign up{% endblock %}
 {% block content %}
-<h1>   "Sign up" </h1>
+<!--When this form is submited send post request to backend-->
+<form method="POST">
+    <h3 align="center">Sign Up</h3>
+    <div class="form-group">
+        <label for="email">Email Address</label>
+        <!-- name tag is used to send data to backend-->
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"></input>
+
+    </div>
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <!-- name tag is used to send data to backend-->
+        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name"></input>
+
+    </div>
+    <div class="form-group">
+        <label for="passwordOne">Password</label>
+        <!-- name tag is used to send data to backend-->
+        <input type="password" class="form-control" id="passwordOne" name="passwordOne"
+            placeholder="Enter password"></input>
+
+    </div>
+    <div class="form-group">
+        <label for="passwordTwo">Repeat Password</label>
+        <!-- name tag is used to send data to backend-->
+        <input type="password" class="form-control" id="passwordTwo" name="passwordTwo"
+            placeholder="Enter password again"></input>
+
+    </div>
+    <br />
+    <button type="submit" class="btn btn-light">Sign Up</button>
+
+</form>
 
 {% endblock %}
