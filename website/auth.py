@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, flash,redirect,url_for
 from string import digits
 from werkzeug.utils import secure_filename
 from . import db
-from models import File
+#from models import File
 import os
 
 #defining Blueprint for flask application
