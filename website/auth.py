@@ -16,13 +16,6 @@ auth = Blueprint('auth',__name__)
 ##Methods specifies which kind of request can be handled
 @auth.route('/login', methods=['GET','POST'])
 def login():
-    #Store data from form as a ImmutableMultiDict [('email', 'vicnte@fskd.com'), ('password', 'sdfs')]
-    data = request.form
-    print(data)
-    return render_template("login.html")
-
-@auth.route('/logout')
-def logout():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -39,8 +32,17 @@ def logout():
                 flash('Incorrect password', category='error')
         else:
             flash('User does not exits', category='error')
+    
+    return render_template('login.html', user = current_user)
 
-    return "<p>logout</p>"
+## Login_requered: Decorator that user needs to be logged in to be able to log out
+@auth.route('/logout')
+@login_required
+def logout():
+    ## Direct to login page
+    logout_user()
+    return redirect(url_for('auth.login'))
+
 
 @auth.route('/sign_up', methods=['GET','POST'])
 def sign_up():
@@ -74,12 +76,13 @@ def sign_up():
             db.session.add(new_user)
             #update database/commit changes
             db.session.commit()
+            login_user(user,remember=True)
             
             flash('Succesfully created account', category='success')
             return redirect(url_for('views.home'))
 
 
-    return render_template("sign_up.html")
+    return render_template("sign_up.html", user = current_user)
 
 @auth.route('/upload', methods=['GET', 'POST'])
 def upload_file():
@@ -90,5 +93,6 @@ def upload_file():
         #new_file = File(filename=new_filename, user_id=current_user.id)  # Assuming you're using Flask-Login for user management
         #db.session.add(new_file)
         db.session.commit()
+        
         return redirect(url_for('index'))
     return render_template('upload.html')

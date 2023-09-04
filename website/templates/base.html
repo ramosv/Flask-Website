@@ -24,11 +24,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbar">
             <div class = "navbar-nav">
-
-                <a class = "nav-item nav-link" id="login" href="/login">Login</a>
-                <a class = "nav-item nav-link" id="signUp" href="/sign_up">Sign up</a>
+                {% if user.is_authenticated %}
                 <a class = "nav-item nav-link" id="logout" href="/logout">Logout</a>
                 <a class = "nav-item nav-link" id="home" href="/">Home</a>
+                {% else %}
+                <a class = "nav-item nav-link" id="login" href="/login">Login</a>
+                <a class = "nav-item nav-link" id="signUp" href="/sign_up">Sign up</a>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -67,13 +69,13 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-    <!--
-            To load selfbuilt JS
-            <script>
-                type="text/javascript"
-                src={{url_for('static', filename='index.js')}}
-            </script>
-        -->
+    
+
+    <script 
+    type="text/javascript"
+    src="{{url_for('static', filename='index.js')}}">   
+    </script>
+
 </body>
 
 </html>
